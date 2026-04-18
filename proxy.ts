@@ -7,7 +7,9 @@ const locales = ['en', 'es']
 const defaultLocale = 'en'
 
 function getLocale(request: NextRequest): string {
-  const headers = { 'accept-language': request.headers.get('accept-language') ?? '' }
+  const headers = {
+    'accept-language': request.headers.get('accept-language') ?? '',
+  }
   const languages = new Negotiator({ headers }).languages()
   return match(languages, locales, defaultLocale)
 }
@@ -16,7 +18,7 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   const hasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   )
 
   if (hasLocale) return
