@@ -39,7 +39,7 @@ portfolio-v2/
 ## i18n Rules
 
 - URL-based routing: `/en` and `/es`
-- `proxy.js` (NOT `middleware.ts`) handles browser language detection and redirects `/` to `/en` or `/es`
+- `proxy.ts` (NOT `middleware.ts`) handles browser language detection and redirects `/` to `/en` or `/es`
 - `generateStaticParams` in `app/[lang]/layout.tsx` returns `[{ lang: 'en' }, { lang: 'es' }]`
 - All translatable strings live in `dictionaries/en.json` and `dictionaries/es.json`
 - `app/[lang]/page.tsx` loads the dictionary and passes content as props to each section
