@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Syne, Epilogue } from 'next/font/google'
 import '@/app/globals.css'
+import Navbar from '@/components/Navbar'
+import { hasLocale } from '@/lib/getDictionary'
+import { notFound } from 'next/navigation'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -27,9 +30,14 @@ export default async function LangLayout({
 }: LayoutProps<'/[lang]'>) {
   const { lang } = await params
 
+  if (!hasLocale(lang)) notFound()
+
   return (
     <html lang={lang} className={`${syne.variable} ${epilogue.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Navbar lang={lang} />
+        {children}
+      </body>
     </html>
   )
 }

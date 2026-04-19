@@ -14,8 +14,8 @@
 portfolio-v2/
 ├── app/
 │   ├── [lang]/
-│   │   ├── layout.tsx       ← sets <html lang>, wraps providers
-│   │   └── page.tsx         ← assembles sections, passes dict props
+│   │   ├── layout.tsx       ← sets <html lang>, wraps providers, renders Navbar
+│   │   └── page.tsx         ← merges dict + data, passes props to each section
 │   ├── globals.css
 │   └── layout.tsx           ← minimal root layout
 │
@@ -28,12 +28,17 @@ portfolio-v2/
 │
 ├── components/              ← reusable UI (Navbar, ProjectCard, SkillIcon, etc.)
 │
-├── dictionaries/            ← all translatable content
+├── dictionaries/            ← translatable strings only
 │   ├── en.json
 │   └── es.json
 │
+├── data/                    ← lang-agnostic facts (TypeScript, not JSON)
+│   ├── experience.ts        ← company, dates, tech used
+│   ├── projects.ts          ← repo/demo URLs, tech stack, image paths
+│   └── skills.ts            ← skill names, icon identifiers
+│
 └── lib/
-    └── getDictionary.ts     ← loads the right JSON by lang
+    └── getDictionary.ts     ← loads the right JSON by lang, exports Dictionary type
 ```
 
 ## i18n Rules
@@ -42,13 +47,13 @@ portfolio-v2/
 - `proxy.ts` (NOT `middleware.ts`) handles browser language detection and redirects `/` to `/en` or `/es`
 - `generateStaticParams` in `app/[lang]/layout.tsx` returns `[{ lang: 'en' }, { lang: 'es' }]`
 - All translatable strings live in `dictionaries/en.json` and `dictionaries/es.json`
-- `app/[lang]/page.tsx` loads the dictionary and passes content as props to each section
+- `app/[lang]/page.tsx` merges the dictionary (text) with `data/` (facts) and passes both as props to each section
 
 ## Server vs Client Components
 
 - Sections are **Server Components** by default — they receive content as props and render static HTML
 - Animated sections use a thin **Client Component wrapper** that adds Framer Motion — the section itself stays a Server Component
-- **Navbar** is a **Client Component** — needs `useRouter` for the language toggle
+- **Navbar** uses a server/client split: `components/Navbar/index.tsx` (server) fetches the dictionary and renders `NavbarClient.tsx` (client) which handles interactivity (`useRouter`, mobile menu state)
 - Add `'use client'` only where state, events, or browser APIs are needed
 
 ## Design
@@ -67,11 +72,42 @@ portfolio-v2/
 4. Skills
 5. Contact
 
+## Content Strategy
+
+Two-layer split — each layer has a single responsibility:
+
+### Layer 1 — Dictionaries (`dictionaries/en.json`, `es.json`)
+
+Translatable strings only:
+
+- Nav labels, section titles, button copy, UI strings ("View project", "Download CV", etc.)
+- Bio, tagline, role descriptions, project descriptions, skill category labels
+- `en.json` is the source of truth for structure — `es.json` must mirror its keys exactly
+
+### Layer 2 — Data (`data/*.ts`)
+
+Lang-agnostic facts, written in TypeScript (not JSON):
+
+- Company names, employment dates, tech used per role
+- Project repo/demo URLs, tech stacks, image/asset paths
+- Skill names, icon identifiers
+
+### How they meet in `page.tsx`
+
+```ts
+const dict = await getDictionary(lang)   // translatable text
+const projects = getProjects()           // structured facts, no async needed
+
+<ProjectsSection content={dict.projects} data={projects} />
+```
+
+Each section receives two props: `content` (translated strings) and `data` (the facts).
+
 ## Content Policy
 
-- **Never invent content.** Bio, experience descriptions, project details, URLs, and asset paths are added by the developer later.
-- Use `// TODO: add content` comments as placeholders where real content goes.
-- Content stubs should be obviously fake (e.g. `"Title goes here"`) so they're never mistaken for real copy.
+- **Never invent content.** Real bio, URLs, and asset paths are added by the developer — use obvious stub values (`"Title goes here"`, `"https://todo"`) so placeholders are never mistaken for real copy.
+- Placeholder comments (`// TODO: fill in`) belong in `data/*.ts` files, not in component files. Components render whatever they receive — stubs live in the data layer.
+- Dictionaries follow the same rule: stub strings in JSON, never in JSX.
 
 ## Stack Gotchas
 
