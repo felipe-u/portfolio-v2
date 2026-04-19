@@ -5,5 +5,52 @@
     "projects": "Proyectos",
     "skills": "Habilidades",
     "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Felipe U",
+    "role": "Título por definir",
+    "tagline": "Tagline por definir",
+    "cta": {
+      "cv": "Descargar CV",
+      "contact": "Escríbeme"
+    }
+  },
+  "experience": {
+    "title": "Experiencia",
+    "present": "Presente",
+    "items": {
+      "company-slug": {
+        "role": "Título del cargo por definir",
+        "description": "Descripción por definir"
+      }
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "viewRepo": "Ver repositorio",
+    "viewDemo": "Ver demo",
+    "items": {
+      "project-slug": {
+        "name": "Nombre del proyecto por definir",
+        "description": "Descripción por definir"
+      }
+    }
+  },
+  "skills": {
+    "title": "Habilidades",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend"
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Descripción por definir",
+    "emailLabel": "Enviar correo",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
   }
 }

@@ -10,13 +10,18 @@ export interface SkillCategory {
 }
 
 const skills: SkillCategory[] = [
-  // TODO: fill in
-  // {
-  //   id: 'frontend',
-  //   skills: [
-  //     { id: 'react', name: 'React', iconIdentifier: 'react' },
-  //   ],
-  // },
+  // TODO: fill in real data
+  {
+    id: 'frontend',
+    skills: [
+      { id: 'react', name: 'React', iconIdentifier: 'react' },
+      { id: 'typescript', name: 'TypeScript', iconIdentifier: 'typescript' },
+    ],
+  },
+  {
+    id: 'backend',
+    skills: [{ id: 'node', name: 'Node.js', iconIdentifier: 'nodejs' }],
+  },
 ]
 
 export const getSkills = (): SkillCategory[] => skills

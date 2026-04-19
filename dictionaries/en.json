@@ -5,5 +5,52 @@
     "projects": "Projects",
     "skills": "Skills",
     "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Felipe U",
+    "role": "Title goes here",
+    "tagline": "Tagline goes here",
+    "cta": {
+      "cv": "Download CV",
+      "contact": "Get in touch"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "Present",
+    "items": {
+      "company-slug": {
+        "role": "Role title goes here",
+        "description": "Description goes here"
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "viewRepo": "View repo",
+    "viewDemo": "View demo",
+    "items": {
+      "project-slug": {
+        "name": "Project name goes here",
+        "description": "Description goes here"
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Description goes here",
+    "emailLabel": "Send an email",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
   }
 }

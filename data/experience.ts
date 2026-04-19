@@ -8,15 +8,15 @@ export interface ExperienceItem {
 }
 
 const experience: ExperienceItem[] = [
-  // TODO: fill in
-  // {
-  //   id: 'company-slug',
-  //   company: 'Company Name',
-  //   url: 'https://todo',
-  //   startDate: '2023-01',
-  //   endDate: null,
-  //   tech: ['React', 'TypeScript'],
-  // },
+  // TODO: fill in real data
+  {
+    id: 'company-slug',
+    company: 'Company Name',
+    url: 'https://todo',
+    startDate: '2023-01',
+    endDate: null,
+    tech: ['React', 'TypeScript'],
+  },
 ]
 
 export const getExperience = (): ExperienceItem[] => experience

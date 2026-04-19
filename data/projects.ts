@@ -7,14 +7,14 @@ export interface ProjectItem {
 }
 
 const projects: ProjectItem[] = [
-  // TODO: fill in
-  // {
-  //   id: 'project-slug',
-  //   repoUrl: 'https://todo',
-  //   demoUrl: null,
-  //   imagePath: null,
-  //   tech: ['React', 'TypeScript'],
-  // },
+  // TODO: fill in real data
+  {
+    id: 'project-slug',
+    repoUrl: 'https://todo',
+    demoUrl: null,
+    imagePath: null,
+    tech: ['React', 'TypeScript'],
+  },
 ]
 
 export const getProjects = (): ProjectItem[] => projects
